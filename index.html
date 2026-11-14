@@ -4,95 +4,330 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مدرسة رجب محمد محمود الثانوية</title>
-<meta name="theme-color" content="#2563eb">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#090d16">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --bg-color: #f8fafc;
-  --card-bg: #ffffff;
-  --text-color: #1e293b;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
-  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  --bg-main: #f4f6fb;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --border-glass: rgba(226, 232, 240, 0.8);
+  --text-main: #0f172a;
+  --text-sub: #64748b;
+  --primary: #6366f1;
+  --primary-glow: rgba(99, 102, 241, 0.35);
+  --accent: #06b6d4;
+  --shadow-smooth: 0 20px 40px -15px rgba(15, 23, 42, 0.07);
+  --radius-box: 24px;
 }
+
 .dark-mode {
-  --primary: #3b82f6;
-  --primary-dark: #2563eb;
-  --bg-color: #0f172a;
-  --card-bg: #1e293b;
-  --text-color: #f8fafc;
-  --text-muted: #94a3b8;
-  --border-color: #334155;
-  --shadow: 0 4px 6px -1px rgba(0,0,0,0.5);
+  --bg-main: #070a12;
+  --bg-card: rgba(15, 23, 42, 0.75);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --primary: #818cf8;
+  --primary-glow: rgba(129, 140, 248, 0.25);
+  --accent: #22d3ee;
+  --shadow-smooth: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; transition: background 0.3s, color 0.3s; }
-body { background: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
-header { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow); }
-.header-brand h1 { font-size: 1.05rem; font-weight: 700; color: var(--primary); }
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+}
+
+/* تحسين أداء عناصر البطاقات والتمرير لمنع اللاج والتهنيج */
+.top-students-card, .question-card, .post-card, .leaderboard-card, .countdown-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 250px;
+  transform: translateZ(0);
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-box);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-smooth);
+}
+
+/* Glass Header */
+header {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glass);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+
+.header-brand { display: flex; align-items: center; gap: 12px; }
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  box-shadow: 0 8px 20px var(--primary-glow);
+}
+
+.header-brand h1 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--text-main), var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .header-actions { display: flex; gap: 10px; align-items: center; }
-.icon-btn { background: var(--bg-color); border: none; font-size: 1.25rem; color: var(--text-color); cursor: pointer; padding: 8px; border-radius: 50%; position: relative; }
-.badge { position: absolute; top: 2px; left: 2px; background: #dc2626; color: white; font-size: 0.65rem; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
 
-.stories-bar { display: flex; gap: 12px; overflow-x: auto; padding: 12px 15px; background: var(--card-bg); border-bottom: 1px solid var(--border-color); }
-.story-item { flex-shrink: 0; width: 72px; text-align: center; cursor: pointer; }
-.story-circle { width: 64px; height: 64px; border-radius: 50%; border: 3px solid var(--primary); display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; font-size: 1.4rem; margin: 0 auto 4px; }
-.story-item span { font-size: 0.7rem; color: var(--text-muted); display: block; }
+.icon-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  font-size: 1.1rem;
+  color: var(--text-main);
+  cursor: pointer;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+.icon-btn:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 20px var(--primary-glow); }
 
-.countdown-card { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: white; border-radius: 14px; padding: 16px; margin-bottom: 16px; text-align: center; }
-.countdown-timer { display: flex; justify-content: center; gap: 12px; margin-top: 10px; }
-.time-box { background: rgba(255,255,255,0.2); border-radius: 10px; padding: 8px 12px; min-width: 60px; }
-.time-box span { display: block; font-size: 1.4rem; font-weight: 700; }
-.time-box small { font-size: 0.7rem; opacity: 0.9; }
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.65rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  border: 2px solid var(--bg-card);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+}
 
-.sidebar { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: var(--card-bg); box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 2000; transition: 0.4s ease; padding: 20px; overflow-y: auto; }
+/* Stories / Urgent News Bar */
+.stories-bar {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 16px 24px;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-glass);
+  scrollbar-width: none;
+}
+.stories-bar::-webkit-scrollbar { display: none; }
+
+.story-item { flex-shrink: 0; width: 75px; text-align: center; cursor: pointer; }
+.story-circle {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b, #ef4444, var(--primary));
+  padding: 2.5px;
+  margin: 0 auto 6px;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25);
+}
+.story-inner {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-card);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef4444;
+  font-size: 1.3rem;
+}
+.story-item span { font-size: 0.75rem; font-weight: 700; color: var(--text-sub); display: block; }
+
+/* Main Container Layout */
+.container { max-width: 760px; margin: 24px auto; padding: 0 16px; flex: 1; width: 100%; }
+
+/* Futuristic Hero Banner */
+.hero-banner {
+  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #06b6d4 100%);
+  color: white;
+  padding: 36px 28px;
+  border-radius: var(--radius-box);
+  text-align: center;
+  margin-bottom: 24px;
+  box-shadow: 0 20px 50px -10px rgba(79, 70, 229, 0.4);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.hero-banner h2 { font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.5px; }
+.hero-banner p { font-size: 0.95rem; opacity: 0.9; font-weight: 600; }
+
+.countdown-card {
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.95), rgba(49, 46, 129, 0.95));
+  color: white;
+  text-align: center;
+  border: 1px solid rgba(129, 140, 248, 0.3);
+  box-shadow: 0 20px 40px rgba(30, 27, 75, 0.3);
+}
+.countdown-timer { display: flex; justify-content: center; gap: 12px; margin-top: 14px; }
+.time-box { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); border-radius: 16px; padding: 12px 16px; min-width: 70px; border: 1px solid rgba(255, 255, 255, 0.15); }
+.time-box span { display: block; font-size: 1.4rem; font-weight: 900; color: #a5b4fc; }
+.time-box small { font-size: 0.7rem; opacity: 0.85; font-weight: 700; }
+
+.section-header { display: flex; align-items: center; gap: 12px; color: var(--text-main); margin-bottom: 18px; font-weight: 900; font-size: 1.15rem; }
+.section-header i { color: var(--primary); font-size: 1.25rem; background: var(--bg-main); padding: 10px; border-radius: 12px; border: 1px solid var(--border-glass); }
+
+/* Leaderboard & Top Students */
+.leaderboard-item { display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: var(--bg-main); border-radius: 16px; margin-bottom: 12px; border: 1px solid var(--border-glass); }
+.rank-badge { width: 36px; height: 36px; background: var(--primary); color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.95rem; box-shadow: 0 6px 15px var(--primary-glow); }
+.rank-badge.gold { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); }
+.rank-badge.silver { background: linear-gradient(135deg, #94a3b8, #64748b); }
+.rank-badge.bronze { background: linear-gradient(135deg, #d97706, #b45309); }
+
+.students-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 16px; text-align: center; }
+.student-item { background: var(--bg-main); padding: 16px 12px; border-radius: 18px; border: 1px solid var(--border-glass); }
+.student-item img { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; border: 3px solid #f59e0b; margin-bottom: 10px; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25); }
+.student-item h5 { font-size: 0.95rem; font-weight: 800; margin-bottom: 2px; }
+.student-item span { font-size: 0.75rem; color: var(--text-sub); font-weight: 700; }
+
+.option-btn { width: 100%; text-align: right; padding: 14px 18px; margin-bottom: 10px; background: var(--bg-main); border: 1px solid var(--border-glass); border-radius: 16px; cursor: pointer; color: var(--text-main); font-size: 0.98rem; font-weight: 700; }
+.option-btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateX(-4px); box-shadow: 0 8px 25px var(--primary-glow); }
+
+.post-image, .question-img { width: 100%; max-height: 420px; object-fit: cover; background: var(--bg-main); border-radius: 16px; margin: 14px 0; border: 1px solid var(--border-glass); }
+
+.share-row { display: flex; gap: 12px; margin-top: 16px; }
+.share-btn { flex: 1; background: var(--bg-main); border: 1px solid var(--border-glass); padding: 12px; border-radius: 14px; cursor: pointer; font-size: 0.88rem; font-weight: 800; color: var(--text-main); display: flex; align-items: center; justify-content: center; gap: 8px; }
+.share-btn:hover { background: var(--border-glass); border-color: var(--primary); color: var(--primary); }
+
+/* Sidebar */
+.sidebar { position: fixed; top: 0; right: -360px; width: 320px; height: 100%; background: var(--bg-card); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); box-shadow: -20px 0 50px rgba(0,0,0,0.2); z-index: 2000; transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1); padding: 28px; overflow-y: auto; border-left: 1px solid var(--border-glass); }
 .sidebar.active { right: 0; }
-.sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
-.close-sidebar { background: none; border: none; font-size: 1.5rem; color: var(--text-color); cursor: pointer; }
-.select-group { margin-bottom: 15px; }
-.select-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
-.select-group select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); }
-.menu-section { margin-top: 20px; background: var(--bg-color); padding: 15px; border-radius: 10px; }
-.overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1500; display: none; }
-.overlay.active { display: block; }
+.sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border-glass); padding-bottom: 16px; }
+.sidebar-header h3 { font-size: 1.15rem; font-weight: 900; color: var(--primary); }
+.close-sidebar { background: none; border: none; font-size: 1.4rem; color: var(--text-main); cursor: pointer; }
 
-#notification-wall { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.95); z-index: 9999; display: none; justify-content: center; align-items: center; padding: 20px; text-align: center; }
-.wall-card { background: var(--card-bg); padding: 30px; border-radius: 15px; max-width: 420px; width: 100%; }
-.wall-card i { font-size: 3rem; color: var(--primary); margin-bottom: 15px; }
+.select-group { margin-bottom: 20px; }
+.select-group label { display: block; margin-bottom: 8px; font-weight: 800; font-size: 0.9rem; color: var(--text-sub); }
+.select-group select { width: 100%; padding: 14px; border-radius: 14px; border: 1px solid var(--border-glass); background: var(--bg-main); color: var(--text-main); font-weight: 700; outline: none; }
+.select-group select:focus { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
 
-.container { max-width: 700px; margin: 16px auto; padding: 0 14px; flex: 1; }
-.hero-banner { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 22px; border-radius: 14px; text-align: center; margin-bottom: 16px; }
-.top-students-card, .question-card, .post-card, .leaderboard-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow); }
-.top-students-card { border: 2px solid #f59e0b; }
-.question-card { border-right: 5px solid var(--primary); }
-.leaderboard-card { border-right: 5px solid #10b981; }
-.section-header { display: flex; align-items: center; gap: 8px; color: var(--primary); margin-bottom: 12px; font-weight: bold; }
-.students-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; text-align: center; }
-.student-item { background: var(--bg-color); padding: 10px; border-radius: 10px; border: 1px solid var(--border-color); }
-.student-item img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid #f59e0b; margin-bottom: 6px; }
-.option-btn { width: 100%; text-align: right; padding: 10px 14px; margin-bottom: 8px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; color: var(--text-color); font-size: 0.95rem; }
-.option-btn:hover { background: var(--primary); color: white; }
-.post-image, .question-img { width: 100%; max-height: 400px; object-fit: contain; background: var(--bg-color); border-radius: 10px; margin: 10px 0; border: 1px solid var(--border-color); }
-.share-row { display: flex; gap: 8px; margin-top: 12px; }
-.share-btn { flex: 1; background: var(--bg-color); border: 1px solid var(--border-color); padding: 8px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-color); }
-.leaderboard-item { display: flex; align-items: center; gap: 12px; padding: 10px; background: var(--bg-color); border-radius: 10px; margin-bottom: 8px; }
-.rank-badge { width: 28px; height: 28px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem; }
-.rank-badge.gold { background: #f59e0b; }
-.rank-badge.silver { background: #94a3b8; }
-.rank-badge.bronze { background: #b45309; }
+.menu-section { margin-top: 24px; background: var(--bg-main); padding: 18px; border-radius: 18px; border: 1px solid var(--border-glass); }
 
-.modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.9); width: 92%; max-width: 520px; background: var(--card-bg); padding: 22px; border-radius: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 3000; opacity: 0; pointer-events: none; transition: 0.3s; max-height: 85vh; overflow-y: auto; }
+.overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.7); backdrop-filter: blur(8px); z-index: 1500; display: none; opacity: 0; transition: opacity 0.3s ease; }
+.overlay.active { display: block; opacity: 1; }
+
+.modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.95); width: 92%; max-width: 520px; background: var(--bg-card); backdrop-filter: blur(30px); padding: 28px; border-radius: 28px; box-shadow: 0 30px 60px rgba(0,0,0,0.3); z-index: 3000; opacity: 0; pointer-events: none; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); max-height: 85vh; overflow-y: auto; border: 1px solid var(--border-glass); }
 .modal.active { transform: translate(-50%,-50%) scale(1); opacity: 1; pointer-events: auto; }
-.modal h3 { color: var(--primary); margin-bottom: 12px; }
-.form-group { margin-bottom: 12px; }
-.form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-.form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-color); }
-.notif-item { padding: 12px; border-bottom: 1px solid var(--border-color); }
-.notif-time { font-size: 0.75rem; color: var(--text-muted); }
+.modal h3 { color: var(--text-main); font-weight: 900; margin-bottom: 18px; font-size: 1.25rem; }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 800; font-size: 0.9rem; }
+.form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1px solid var(--border-glass); border-radius: 14px; background: var(--bg-main); color: var(--text-main); font-size: 0.98rem; font-weight: 700; outline: none; }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
 
-footer { text-align: center; padding: 14px; background: var(--card-bg); border-top: 1px solid var(--border-color); font-size: 0.75rem; color: var(--text-muted); margin-top: auto; }
+#app-download-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 20px;
+  right: 20px;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  backdrop-filter: blur(25px);
+  border: 1px solid var(--border-glass);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  z-index: 2500;
+  display: none;
+  align-items: center;
+  gap: 16px;
+}
+
+.cyber-icon-box {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 10px 25px var(--primary-glow);
+}
+
+.cyber-content { flex: 1; }
+.cyber-content h4 { font-size: 1rem; font-weight: 900; color: var(--text-main); margin-bottom: 4px; }
+.cyber-content p { font-size: 0.8rem; color: var(--text-sub); font-weight: 700; line-height: 1.4; }
+
+.cyber-actions { display: flex; gap: 10px; margin-top: 12px; }
+.cyber-btn-download {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 6px 15px var(--primary-glow);
+}
+.cyber-btn-close {
+  background: var(--bg-main);
+  color: var(--text-sub);
+  border: 1px solid var(--border-glass);
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#notification-wall { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(12px); z-index: 9999; display: none; justify-content: center; align-items: center; padding: 20px; text-align: center; }
+.wall-card { background: var(--bg-card); padding: 36px; border-radius: 28px; max-width: 420px; width: 100%; border: 1px solid var(--border-glass); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+.wall-card i { font-size: 3.2rem; color: var(--primary); margin-bottom: 18px; filter: drop-shadow(0 10px 15px var(--primary-glow)); }
+
+.notif-item { padding: 14px 0; border-bottom: 1px solid var(--border-glass); }
+.notif-time { font-size: 0.75rem; color: var(--text-sub); margin-top: 4px; font-weight: 700; }
+
+footer { text-align: center; padding: 24px; background: var(--bg-card); border-top: 1px solid var(--border-glass); font-size: 0.85rem; font-weight: 800; color: var(--text-sub); margin-top: auto; backdrop-filter: blur(10px); }
 </style>
 </head>
 <body>
@@ -100,23 +335,38 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
 <div id="notification-wall">
   <div class="wall-card">
     <i class="fa-solid fa-bell"></i>
-    <h3>تفعيل الإشعارات</h3>
-    <p>عشان توصلك التنبيهات العاجلة، اضغط السماح.</p>
-    <button style="background:var(--primary);color:white;padding:12px;border-radius:8px;width:100%;border:none;cursor:pointer;font-weight:bold;margin-top:12px;" onclick="requestMandatoryNotifications()">السماح بالإشعارات</button>
+    <h3>تفعيل التنبيهات الفورية</h3>
+    <p style="color:var(--text-sub); font-size:0.92rem; margin-top:8px; font-weight:700;">فعّل التنبيهات لتصلك الإعلانات والواجبات المدرسية العاجلة فور نزولها.</p>
+    <button style="background:var(--primary);color:white;padding:14px;border-radius:14px;width:100%;border:none;cursor:pointer;font-weight:900;margin-top:20px;font-size:1rem; box-shadow: 0 8px 20px var(--primary-glow);" onclick="requestMandatoryNotifications()">السماح بالتنبيهات</button>
+  </div>
+</div>
+
+<div id="app-download-banner">
+  <div class="cyber-icon-box"><i class="fa-solid fa-rocket"></i></div>
+  <div class="cyber-content">
+    <h4>تطبيق مدرسة رجب محمد محمود</h4>
+    <p>ثبّت التطبيق الرسمي على هاتفك الآن لاستجابة أسرع وميزات متكاملة.</p>
+    <div class="cyber-actions">
+      <a href="https://s20262402-jpg.github.io/-/" target="_blank" class="cyber-btn-download">تنزيل التطبيق</a>
+      <button class="cyber-btn-close" onclick="dismissAppBanner()">إخفاء</button>
+    </div>
   </div>
 </div>
 
 <div class="stories-bar" id="stories-bar" style="display:none;"></div>
 
 <header>
-  <div class="header-brand"><h1>مدرسة رجب محمد محمود</h1></div>
+  <div class="header-brand">
+    <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+    <h1>مدرسة رجب محمد محمود</h1>
+  </div>
   <div class="header-actions">
     <button class="icon-btn" onclick="openNotifHistory()" title="الإشعارات">
-      <i class="fa-solid fa-bell"></i>
+      <i class="fa-regular fa-bell"></i>
       <span class="badge" id="notif-badge" style="display:none;">0</span>
     </button>
-    <button class="icon-btn" onclick="toggleDarkMode()"><i class="fa-solid fa-moon" id="dark-icon"></i></button>
-    <button class="icon-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+    <button class="icon-btn" onclick="toggleDarkMode()" title="الوضع الليلي"><i class="fa-solid fa-moon" id="dark-icon"></i></button>
+    <button class="icon-btn" onclick="toggleSidebar()" title="القائمة"><i class="fa-solid fa-bars-staggered"></i></button>
   </div>
 </header>
 
@@ -124,7 +374,7 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
 
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
-    <h3>تحديد الصف والفصل</h3>
+    <h3>القائمة والصفوف</h3>
     <button class="close-sidebar" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
   </div>
   <div class="select-group">
@@ -143,62 +393,65 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
     </select>
   </div>
   <div class="menu-section">
-    <button style="width:100%;padding:10px 0;margin-bottom:10px;border:none;background:var(--primary);color:white;border-radius:8px;cursor:pointer;" onclick="openModal('schedule-modal')"><i class="fa-solid fa-calendar-days"></i> جدول الحصص</button>
-    <button style="width:100%;padding:10px 0;border:none;background:var(--primary);color:white;border-radius:8px;cursor:pointer;" onclick="openModal('exam-modal')"><i class="fa-solid fa-file-lines"></i> جدول الامتحانات</button>
+    <button style="width:100%;padding:14px 0;margin-bottom:12px;border:none;background:var(--primary);color:white;border-radius:14px;cursor:pointer;font-weight:900;font-size:0.95rem; box-shadow: 0 6px 15px var(--primary-glow);" onclick="openModal('schedule-modal')"><i class="fa-solid fa-calendar-days"></i> جدول الحصص</button>
+    <button style="width:100%;padding:14px 0;margin-bottom:12px;border:none;background:var(--primary);color:white;border-radius:14px;cursor:pointer;font-weight:900;font-size:0.95rem; box-shadow: 0 6px 15px var(--primary-glow);" onclick="openModal('exam-modal')"><i class="fa-solid fa-file-lines"></i> جدول الامتحانات</button>
+    <a href="https://s20262402-jpg.github.io/-/" target="_blank" style="text-decoration:none;display:block;">
+      <button style="width:100%;padding:14px 0;border:none;background:linear-gradient(135deg, #10b981, #059669);color:white;border-radius:14px;cursor:pointer;font-weight:900;font-size:0.95rem; box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3);"><i class="fa-solid fa-download"></i> تنزيل التطبيق</button>
+    </a>
   </div>
 </div>
 
 <div class="modal" id="schedule-modal">
   <h3 id="schedule-title">جدول الحصص</h3>
-  <div id="schedule-content" style="margin-bottom:15px;">يرجى تحديد الصف والفصل أولاً.</div>
-  <button style="background:var(--primary);color:white;padding:8px;border-radius:8px;width:100%;border:none;cursor:pointer;" onclick="closeModal('schedule-modal')">إغلاق</button>
+  <div id="schedule-content" style="margin-bottom:20px; color:var(--text-sub); font-weight:700;">يرجى تحديد الصف والفصل أولاً من القائمة الجانبية.</div>
+  <button style="background:var(--primary);color:white;padding:12px;border-radius:14px;width:100%;border:none;cursor:pointer;font-weight:900;" onclick="closeModal('schedule-modal')">إغلاق</button>
 </div>
 
 <div class="modal" id="exam-modal">
   <h3 id="exam-title">جدول الامتحانات</h3>
-  <div id="exam-content" style="margin-bottom:15px;">لا توجد امتحانات معلنة حالياً.</div>
-  <button style="background:var(--primary);color:white;padding:8px;border-radius:8px;width:100%;border:none;cursor:pointer;" onclick="closeModal('exam-modal')">إغلاق</button>
+  <div id="exam-content" style="margin-bottom:20px; color:var(--text-sub); font-weight:700;">لا توجد امتحانات معلنة حالياً.</div>
+  <button style="background:var(--primary);color:white;padding:12px;border-radius:14px;width:100%;border:none;cursor:pointer;font-weight:900;" onclick="closeModal('exam-modal')">إغلاق</button>
 </div>
 
 <div class="modal" id="answer-modal">
-  <h3>إرسال إجابة</h3>
-  <div class="form-group"><label>الاسم بالكامل:</label><input type="text" id="ans-student-name" placeholder="الاسم ثلاثي"></div>
+  <h3>إرسال إجابة السؤال</h3>
+  <div class="form-group"><label>الاسم بالكامل:</label><input type="text" id="ans-student-name" placeholder="اكتب اسمك ثلاثي"></div>
   <div class="form-group"><label>الفصل (مثال: 1/1):</label><input type="text" id="ans-student-class" placeholder="1/1"></div>
-  <div class="form-group" id="essay-answer-box" style="display:none;"><label>الإجابة:</label><textarea id="ans-student-text" rows="4"></textarea></div>
-  <button style="background:var(--primary);color:white;padding:10px;border-radius:8px;width:100%;border:none;cursor:pointer;" onclick="submitAnswerToAdmin()">إرسال الإجابة</button>
-  <button style="background:#64748b;color:white;padding:8px;border-radius:8px;width:100%;border:none;cursor:pointer;margin-top:8px;" onclick="closeModal('answer-modal')">إلغاء</button>
+  <div class="form-group" id="essay-answer-box" style="display:none;"><label>الإجابة:</label><textarea id="ans-student-text" rows="4" placeholder="اكتب إجابتك هنا..."></textarea></div>
+  <button style="background:var(--primary);color:white;padding:14px;border-radius:14px;width:100%;border:none;cursor:pointer;font-weight:900;margin-top:6px; box-shadow: 0 8px 20px var(--primary-glow);" onclick="submitAnswerToAdmin()">إرسال الإجابة النهائية</button>
+  <button style="background:transparent;color:var(--text-sub);padding:12px;border-radius:14px;width:100%;border:1px solid var(--border-glass);cursor:pointer;font-weight:800;margin-top:10px;" onclick="closeModal('answer-modal')">إلغاء</button>
 </div>
 
 <div class="modal" id="notif-modal">
-  <h3><i class="fa-solid fa-bell"></i> سجل الإشعارات</h3>
+  <h3><i class="fa-regular fa-bell"></i> سجل الإشعارات والتنبيهات</h3>
   <div id="notif-list" style="max-height:350px;overflow-y:auto;"></div>
-  <button style="background:var(--primary);color:white;padding:8px;border-radius:8px;width:100%;border:none;cursor:pointer;margin-top:12px;" onclick="closeModal('notif-modal')">إغلاق</button>
+  <button style="background:var(--primary);color:white;padding:12px;border-radius:14px;width:100%;border:none;cursor:pointer;font-weight:900;margin-top:20px;" onclick="closeModal('notif-modal')">إغلاق</button>
 </div>
 
 <div class="modal" id="story-modal">
   <h3 id="story-title">تنبيه عاجل</h3>
-  <p id="story-body" style="margin:15px 0;line-height:1.7;"></p>
-  <button style="background:var(--primary);color:white;padding:8px;border-radius:8px;width:100%;border:none;cursor:pointer;" onclick="closeModal('story-modal')">حسناً</button>
+  <p id="story-body" style="margin:18px 0;line-height:1.8; color:var(--text-sub); font-weight:700;"></p>
+  <button style="background:var(--primary);color:white;padding:12px;border-radius:14px;width:100%;border:none;cursor:pointer;font-weight:900;" onclick="closeModal('story-modal')">حسناً، فهمت</button>
 </div>
 
 <div class="container">
   <div class="hero-banner">
     <h2>منصة طلاب مدرسة رجب محمد محمود</h2>
-    <p>أخبار • تنبيهات • جداول • تحديات</p>
+    <p>البوابة الرقمية الموحدة للأخبار، الجداول، والتحديات الدراسية</p>
   </div>
 
   <div class="countdown-card" id="countdown-card" style="display:none;">
-    <div id="countdown-label" style="font-weight:600;"></div>
+    <div id="countdown-label" style="font-weight:800; font-size:1rem;"></div>
     <div class="countdown-timer" id="countdown-timer"></div>
   </div>
 
   <div class="leaderboard-card">
-    <div class="section-header"><i class="fa-solid fa-trophy"></i> ترتيب المتفوقين (حسب النقاط)</div>
-    <div id="leaderboard-list"><p style="text-align:center;color:var(--text-muted);">جاري التحميل...</p></div>
+    <div class="section-header"><i class="fa-solid fa-trophy"></i> لوحة المتفوقين الأوائل</div>
+    <div id="leaderboard-list"><p style="text-align:center;color:var(--text-sub);padding:14px;font-weight:700;">جاري التحميل...</p></div>
   </div>
 
   <div class="top-students-card">
-    <div class="section-header" style="color:#d97706;"><i class="fa-solid fa-award"></i> لوحة الشرف</div>
+    <div class="section-header" style="color:#f59e0b;"><i class="fa-solid fa-medal"></i> لوحة الشرف المدرسية</div>
     <div class="students-grid" id="top-students-grid"></div>
   </div>
 
@@ -206,7 +459,7 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
   <div id="posts-container"></div>
 </div>
 
-<footer>إنشاء / حسام مصطفي عبدالرحمن عبدالله</footer>
+<footer>تصميم وتطوير / حسام مصطفي عبدالرحمن عبدالله</footer>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
@@ -287,6 +540,12 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
     }
   };
 
+  window.dismissAppBanner = function() {
+    const banner = document.getElementById("app-download-banner");
+    if (banner) banner.style.display = "none";
+    localStorage.setItem("appBannerDismissed", "true");
+  };
+
   window.requestMandatoryNotifications = async function () {
     try {
       if (!("Notification" in window)) {
@@ -307,7 +566,7 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
         }
         try {
           new Notification("مدرسة رجب محمد محمود", {
-            body: "تم تفعيل الإشعارات بنجاح!",
+            body: "تم تفعيل التنبيهات بنجاح!",
             icon: "https://cdn-icons-png.flaticon.com/512/2933/2933258.png"
           });
         } catch (e) {}
@@ -322,11 +581,11 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
   window.openNotifHistory = function () {
     const list = document.getElementById("notif-list");
     if (notifHistory.length === 0) {
-      list.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px;">مفيش إشعارات لسه</p>';
+      list.innerHTML = '<p style="text-align:center;color:var(--text-sub);padding:20px;font-weight:700;">لا توجد تنبيهات مسجلة حتى الآن</p>';
     } else {
       let html = "";
       notifHistory.forEach(n => {
-        html += '<div class="notif-item"><strong>' + n.title + '</strong><p style="margin:4px 0;">' + n.body + '</p><div class="notif-time">' + n.time + '</div></div>';
+        html += '<div class="notif-item"><strong style="color:var(--text-main);font-size:0.98rem;font-weight:800;">' + n.title + '</strong><p style="margin:4px 0;color:var(--text-sub);font-size:0.88rem;font-weight:700;">' + n.body + '</p><div class="notif-time">' + n.time + '</div></div>';
       });
       list.innerHTML = html;
     }
@@ -353,9 +612,9 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
     const name = document.getElementById("ans-student-name").value.trim();
     const cls = document.getElementById("ans-student-class").value.trim();
     const textAns = document.getElementById("ans-student-text").value.trim();
-    if (!name || !cls) { alert("اكتب اسمك وفصلك"); return; }
-    if (isEssayQuestion && !textAns) { alert("اكتب الإجابة"); return; }
-    if (!confirm("بعد الإرسال مش هتقدر تغير الإجابة. متأكد؟")) return;
+    if (!name || !cls) { alert("برجاء كتابة الاسم والفصل"); return; }
+    if (isEssayQuestion && !textAns) { alert("برجاء كتابة الإجابة"); return; }
+    if (!confirm("بعد إرسال الإجابة لا يمكنك تعديلها. متأكد؟")) return;
 
     try {
       await addDoc(collection(db, "student_answers"), {
@@ -373,7 +632,7 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
       window.closeModal("answer-modal");
       location.reload();
     } catch (e) {
-      alert("خطأ: " + e.message);
+      alert("حدث خطأ: " + e.message);
     }
   };
 
@@ -382,13 +641,13 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
       navigator.share({ title: "مدرسة رجب محمد محمود", text: text, url: location.href });
     } else {
       navigator.clipboard.writeText(location.href);
-      alert("تم نسخ الرابط");
+      alert("تم نسخ الرابط بنجاح");
     }
   };
 
   window.copyLink = function () {
     navigator.clipboard.writeText(location.href);
-    alert("تم نسخ رابط الموقع");
+    alert("تم نسخ رابط الموقع بنجاح");
   };
 
   window.showStory = function (title, body) {
@@ -422,18 +681,15 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
 
     const docId = "class_" + cls.replace("/", "_");
 
-    // إلغاء الاستماع القديم لو موجود
     if (scheduleUnsubscribe) {
       scheduleUnsubscribe();
       scheduleUnsubscribe = null;
     }
 
-    // استمع لحظياً للتغييرات
     scheduleUnsubscribe = onSnapshot(doc(db, "schedules", docId), (snap) => {
       if (snap.exists()) {
         const d = snap.data();
 
-        // جدول الحصص
         let sHtml = "";
         if (d.schedule && d.schedule.trim() !== "") {
           sHtml = d.schedule.replace(/\n/g, "<br>");
@@ -444,7 +700,6 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
         if (!sHtml) sHtml = "لم يتم إضافة جدول الحصص بعد.";
         document.getElementById("schedule-content").innerHTML = sHtml;
 
-        // جدول الامتحانات
         let eHtml = "";
         if (d.exams && d.exams.trim() !== "") {
           eHtml = d.exams.replace(/\n/g, "<br>");
@@ -456,7 +711,6 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
         document.getElementById("exam-content").innerHTML = eHtml;
 
       } else {
-        // المستند اتمسح بالكامل
         document.getElementById("schedule-content").innerHTML = "لم يتم إضافة جدول الحصص بعد.";
         document.getElementById("exam-content").innerHTML = "لا توجد امتحانات معلنة حالياً.";
       }
@@ -464,6 +718,13 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
   }
 
   window.addEventListener("DOMContentLoaded", function () {
+    if (!localStorage.getItem("appBannerDismissed")) {
+      setTimeout(() => {
+        const banner = document.getElementById("app-download-banner");
+        if (banner) banner.style.display = "flex";
+      }, 1000);
+    }
+
     if ("Notification" in window && Notification.permission !== "granted") {
       document.getElementById("notification-wall").style.display = "flex";
     }
@@ -491,29 +752,40 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
     } catch (e) {}
   }
 
-  // Leaderboard
+  // --- محسن أداء لوحة المتفوقين (باستخدام DocumentFragment لمنع تهنيج الشاشة) ---
   onSnapshot(query(collection(db, "points"), orderBy("points", "desc"), limit(10)), function (snap) {
     const list = document.getElementById("leaderboard-list");
     if (snap.empty) {
-      list.innerHTML = '<p style="text-align:center;color:var(--text-muted);">مفيش نقاط لسه</p>';
+      list.innerHTML = '<p style="text-align:center;color:var(--text-sub);font-weight:700;">لا توجد نقاط مسجلة بعد</p>';
       return;
     }
-    let html = "", rank = 1;
+    const fragment = document.createDocumentFragment();
+    let rank = 1;
     snap.forEach(function (docSnap) {
       const p = docSnap.data();
       let badgeClass = rank === 1 ? "gold" : rank === 2 ? "silver" : rank === 3 ? "bronze" : "";
-      html += '<div class="leaderboard-item"><div class="rank-badge ' + badgeClass + '">' + rank + '</div>';
-      html += '<div style="flex:1"><strong>' + p.studentName + '</strong><br><small>فصل ' + p.studentClass + '</small></div>';
-      html += '<div style="font-weight:700;color:var(--primary)">' + p.points + ' نقطة</div></div>';
+      const item = document.createElement("div");
+      item.className = "leaderboard-item";
+      item.innerHTML = '<div class="rank-badge ' + badgeClass + '">' + rank + '</div>' +
+        '<div style="flex:1"><strong style="font-size:0.98rem;font-weight:800;">' + p.studentName + '</strong><br><small style="color:var(--text-sub);font-weight:700;">فصل ' + p.studentClass + '</small></div>' +
+        '<div style="font-weight:900;color:var(--primary);font-size:1rem;">' + p.points + ' نقطة</div>';
+      fragment.appendChild(item);
       rank++;
     });
-    list.innerHTML = html;
+    list.innerHTML = "";
+    list.appendChild(fragment);
   });
 
-  // Questions
+  // --- محسن أداء الأسئلة ---
   onSnapshot(collection(db, "questions"), function (snap) {
     const box = document.getElementById("questions-container");
-    box.innerHTML = "";
+    const fragment = document.createDocumentFragment();
+    
+    if (snap.empty) {
+      box.innerHTML = "";
+      return;
+    }
+
     snap.forEach(function (docSnap) {
       const q = docSnap.data();
       const qId = docSnap.id;
@@ -525,20 +797,20 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
         time = d.toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }) + " | " + d.toLocaleDateString("ar-EG");
       }
 
-      let body = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">';
-      body += '<div class="section-header" style="margin:0"><i class="fa-solid fa-circle-question"></i> سؤال ' + (q.type === "mcq" ? "اختياري" : "مقالي") + ' <span style="font-size:0.8rem;color:#16a34a;margin-right:6px;">(' + qPoints + ' نقطة)</span></div>';
-      body += '<span style="font-size:0.75rem;color:var(--text-muted)">' + time + '</span></div>';
-      body += '<p style="font-size:1.05rem;margin-bottom:8px;">' + (q.question || "") + '</p>';
+      let body = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
+        '<div class="section-header" style="margin:0"><i class="fa-solid fa-circle-question"></i> سؤال ' + (q.type === "mcq" ? "اختياري" : "مقالي") + ' <span style="font-size:0.8rem;color:#10b981;font-weight:800;margin-right:6px;">(' + qPoints + ' نقطة)</span></div>' +
+        '<span style="font-size:0.75rem;color:var(--text-sub);font-weight:700;">' + time + '</span></div>' +
+        '<p style="font-size:1.05rem;margin-bottom:14px;font-weight:800;color:var(--text-main);">' + (q.question || "") + '</p>';
       if (q.image) body += '<img src="' + q.image + '" class="question-img">';
 
       if (answered) {
-        body += '<div style="background:#fee2e2;color:#991b1b;padding:10px;border-radius:8px;text-align:center;font-weight:bold;">تمت الإجابة مسبقاً - في انتظار المراجعة</div>';
+        body += '<div style="background:rgba(239,68,68,0.1);color:#ef4444;padding:14px;border-radius:14px;text-align:center;font-weight:800;border:1px solid rgba(239,68,68,0.2);">تمت الإجابة مسبقاً - في انتظار المراجعة</div>';
       } else if (q.type === "mcq") {
         (q.options || []).forEach(opt => {
           body += '<button class="option-btn" data-qid="' + qId + '" data-choice="' + opt.replace(/"/g, '&quot;') + '" data-essay="false" data-points="' + qPoints + '">' + opt + '</button>';
         });
       } else {
-        body += '<button style="background:var(--primary);color:white;padding:10px;border-radius:8px;border:none;width:100%;font-weight:bold;cursor:pointer;" data-qid="' + qId + '" data-choice="" data-essay="true" data-points="' + qPoints + '">إجابة على السؤال المقالي</button>';
+        body += '<button style="background:var(--primary);color:white;padding:14px;border-radius:14px;border:none;width:100%;font-weight:900;cursor:pointer;font-size:1rem;box-shadow: 0 8px 20px var(--primary-glow);" data-qid="' + qId + '" data-choice="" data-essay="true" data-points="' + qPoints + '">إجابة على السؤال المقالي</button>';
       }
 
       body += '<div class="share-row"><button class="share-btn" data-share="true"><i class="fa-solid fa-share-nodes"></i> مشاركة</button><button class="share-btn" onclick="copyLink()"><i class="fa-solid fa-link"></i> نسخ الرابط</button></div>';
@@ -554,21 +826,27 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
       });
       const shareBtn = card.querySelector("[data-share]");
       if (shareBtn) shareBtn.addEventListener("click", () => window.shareContent(q.question || "سؤال"));
-      box.appendChild(card);
+      
+      fragment.appendChild(card);
     });
+
+    box.innerHTML = "";
+    box.appendChild(fragment);
   });
 
-  // Top students
+  // --- محسن أداء لوحة الشرف ---
   onSnapshot(collection(db, "top_students"), function (snap) {
     const grid = document.getElementById("top-students-grid");
-    grid.innerHTML = "";
+    const fragment = document.createDocumentFragment();
     snap.forEach(function (docSnap) {
       const st = docSnap.data();
       const item = document.createElement("div");
       item.className = "student-item";
       item.innerHTML = '<img src="' + (st.image || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png") + '"><h5>' + st.name + '</h5><span>فصل ' + st.class + '</span>';
-      grid.appendChild(item);
+      fragment.appendChild(item);
     });
+    grid.innerHTML = "";
+    grid.appendChild(fragment);
   });
 
   // Alerts
@@ -580,7 +858,7 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
       bar.innerHTML = "";
       const item = document.createElement("div");
       item.className = "story-item";
-      item.innerHTML = '<div class="story-circle"><i class="fa-solid fa-bullhorn"></i></div><span>عاجل</span>';
+      item.innerHTML = '<div class="story-circle"><div class="story-inner"><i class="fa-solid fa-bullhorn"></i></div></div><span>عاجل</span>';
       item.onclick = () => window.showStory("تنبيه عاجل", d.message);
       bar.appendChild(item);
       addToNotifHistory("تنبيه عاجل", d.message);
@@ -598,7 +876,7 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
     function update() {
       const diff = target - Date.now();
       if (diff <= 0) {
-        document.getElementById("countdown-timer").innerHTML = '<div style="font-size:1.2rem;">انتهى الوقت</div>';
+        document.getElementById("countdown-timer").innerHTML = '<div style="font-size:1.15rem;font-weight:900;">انتهى الوقت المحدد</div>';
         return;
       }
       const days = Math.floor(diff / 86400000);
@@ -615,10 +893,11 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
     setInterval(update, 1000);
   });
 
-  // Posts
+  // --- محسن أداء المنشورات ---
   onSnapshot(query(collection(db, "posts"), orderBy("timestamp", "desc")), function (snap) {
     const box = document.getElementById("posts-container");
-    box.innerHTML = "";
+    const fragment = document.createDocumentFragment();
+
     snap.forEach(function (docSnap) {
       const post = docSnap.data();
       let time = "";
@@ -634,17 +913,17 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
         content = content.replace("{{HTML}}", "").trim();
       }
 
-      let html = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">';
-      html += '<div style="display:flex;align-items:center;gap:10px;">';
-      html += '<div style="width:36px;height:36px;background:var(--primary);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;">إ</div>';
-      html += '<div><h4 style="margin:0;font-size:0.95rem;">إدارة المدرسة</h4><span style="font-size:0.75rem;color:var(--text-muted);">مستند رسمي</span></div></div>';
-      html += '<span style="font-size:0.75rem;color:var(--text-muted);">' + time + '</span></div>';
+      let html = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">' +
+        '<div style="display:flex;align-items:center;gap:12px;">' +
+        '<div style="width:40px;height:40px;background:var(--primary);color:white;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1rem;box-shadow: 0 6px 15px var(--primary-glow);">إ</div>' +
+        '<div><h4 style="margin:0;font-size:1rem;font-weight:800;">إدارة المدرسة</h4><span style="font-size:0.75rem;color:var(--text-sub);font-weight:700;">منشور رسمي</span></div></div>' +
+        '<span style="font-size:0.75rem;color:var(--text-sub);font-weight:700;">' + time + '</span></div>';
 
       if (isHtmlPost) {
-        html += '<div style="margin:12px 0;border:1px solid var(--border-color);border-radius:10px;overflow:hidden;">';
-        html += '<iframe srcdoc="' + content.replace(/"/g, '&quot;') + '" style="width:100%;min-height:300px;border:none;background:white;" sandbox="allow-scripts allow-same-origin"></iframe></div>';
+        html += '<div style="margin:14px 0;border:1px solid var(--border-glass);border-radius:16px;overflow:hidden;">' +
+          '<iframe srcdoc="' + content.replace(/"/g, '&quot;') + '" style="width:100%;min-height:300px;border:none;background:white;" sandbox="allow-scripts allow-same-origin"></iframe></div>';
       } else {
-        html += '<div>' + content + '</div>';
+        html += '<div style="font-weight:700; font-size:1.02rem; color:var(--text-main); line-height:1.7;">' + content + '</div>';
         if (post.image) html += '<img src="' + post.image + '" class="post-image">';
       }
 
@@ -655,8 +934,12 @@ footer { text-align: center; padding: 14px; background: var(--card-bg); border-t
       card.innerHTML = html;
       const shareBtn = card.querySelector(".share-post-btn");
       if (shareBtn) shareBtn.addEventListener("click", () => window.shareContent(isHtmlPost ? "منشور من المدرسة" : (post.text || "منشور")));
-      box.appendChild(card);
+      
+      fragment.appendChild(card);
     });
+
+    box.innerHTML = "";
+    box.appendChild(fragment);
   });
 </script>
 </body>
